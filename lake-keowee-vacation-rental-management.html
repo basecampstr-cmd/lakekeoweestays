@@ -99,7 +99,7 @@ footer a{color:#b9c7d2}footer a:hover{color:#ffd982}
 </style>
 <style>
 .lead-form{max-width:560px;margin:0 auto}
-.lead-form .hp{position:absolute!important;left:-9999px}
+.lead-form .hp{position:absolute!important;left:-9999px;height:0;overflow:hidden}
 .lf-title{color:#123049;font-size:1.5rem;margin:0 0 4px;font-family:Georgia,'Times New Roman',serif}
 .lf-sub{color:#5f6b78;font-size:.92rem;margin:0 0 14px;line-height:1.4}
 .lead-form label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#123049;margin:13px 0 6px}
@@ -109,6 +109,7 @@ footer a{color:#b9c7d2}footer a:hover{color:#ffd982}
 .lf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .lf-btn{width:100%;margin-top:22px;background:#c4661c;color:#fff;font-weight:700;font-size:1rem;padding:14px;border:none;border-radius:10px;cursor:pointer;transition:.2s;box-shadow:0 6px 16px rgba(196,102,28,.3)}
 .lf-btn:hover{background:#a9560f;transform:translateY(-1px)}
+.lf-btn:disabled{opacity:.6;cursor:default}
 .lf-ok{margin-top:16px;background:#e8f6ee;border:1px solid #b6e2c8;color:#1c6b3f;padding:14px 16px;border-radius:10px;font-weight:600;font-size:.95rem}
 @media(max-width:520px){.lf-row{grid-template-columns:1fr}}
 </style>
@@ -239,9 +240,8 @@ footer a{color:#b9c7d2}footer a:hover{color:#ffd982}
       <div class="cbtns"><a class="btn" href="https://link.basecampgetaways.com/widget/booking/ux0V6sy1tHczRlxZIU3o" target="_blank" rel="noopener">Schedule a Call →</a><a class="btn ghost" href="tel:+17069672392">Call 706-967-2392</a></div>
       <p style="margin-top:18px">Or reach us directly at <a href="mailto:joseph@basecampgetaways.com" style="color:#ffd982;font-weight:600">joseph@basecampgetaways.com</a></p>
     </div>
-    <div class="card cardform"><form name="revenue-estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="lead-form" onsubmit="return submitLead(event)">
-  <input type="hidden" name="form-name" value="revenue-estimate">
-  <p class="hp"><label>Do not fill this out: <input name="bot-field"></label></p>
+    <div class="card cardform"><form name="revenue-estimate" class="lead-form" onsubmit="return submitLead(event)">
+  <p class="hp"><label>Do not fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
   <h3 class="lf-title">Get a Free Revenue Estimate</h3>
   <p class="lf-sub">Tell us about your Lake Keowee property and we&rsquo;ll send a free revenue projection with no obligation.</p>
   <div class="lf-row">
@@ -249,7 +249,7 @@ footer a{color:#b9c7d2}footer a:hover{color:#ffd982}
     <div><label>Last Name</label><input name="lastName" type="text" autocomplete="family-name"></div>
   </div>
   <label>Email</label><input name="email" type="email" required autocomplete="email">
-  <label>Phone</label><input name="phone" type="tel" autocomplete="tel">
+  <label>Phone</label><input name="phone" type="tel" required autocomplete="tel">
   <label>Property Address / Area on the Lake</label><input name="address" type="text" placeholder="e.g. Sunset, Keowee Key, Cliffs at Keowee">
   <div class="lf-row">
     <div><label>Bedrooms</label><select name="bedrooms"><option>1&ndash;2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select></div>
@@ -271,18 +271,23 @@ footer a{color:#b9c7d2}footer a:hover{color:#ffd982}
 document.getElementById('hamb').onclick=function(){document.getElementById('menu').classList.toggle('show');};
 </script>
 <script>
+var LEAD_WEBHOOK="https://services.leadconnectorhq.com/hooks/p4Ia2GHMp8aHTsE7gsh1/webhook-trigger/9af28758-a06e-40f3-bf2a-ef67b4d074eb";
 function submitLead(e){
   e.preventDefault();
-  var form=e.target, data=new FormData(form), body=new URLSearchParams();
-  data.forEach(function(v,k){body.append(k,v);});
-  function done(msg){
-    var ok=form.querySelector('.lf-ok'); if(msg)ok.innerHTML=msg; ok.hidden=false;
+  var form=e.target;
+  var hp=form.querySelector('[name=bot-field]'); if(hp && hp.value){return false;}
+  var btn=form.querySelector('.lf-btn'); if(btn){btn.disabled=true;btn.textContent='Sending...';}
+  var data=new FormData(form), body=new URLSearchParams();
+  data.forEach(function(v,k){ if(k!=='bot-field') body.append(k,v); });
+  body.append('source','Lake Keowee Stays Website');
+  body.append('full_name',(form.firstName?form.firstName.value:'')+' '+(form.lastName?form.lastName.value:''));
+  function done(){
+    var ok=form.querySelector('.lf-ok'); ok.hidden=false;
     Array.prototype.slice.call(form.children).forEach(function(c){if(!c.classList.contains('lf-ok'))c.style.display='none';});
     ok.scrollIntoView({behavior:'smooth',block:'center'});
   }
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()})
-    .then(function(r){done();})
-    .catch(function(){done('Thanks! If you don&rsquo;t hear back soon, email joseph@basecampgetaways.com.');});
+  fetch(LEAD_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()})
+    .then(done).catch(done);
   return false;
 }
 </script>
