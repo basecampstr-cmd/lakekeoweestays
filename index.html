@@ -126,15 +126,18 @@ section.pad{padding:74px 0}
 .guide-note{text-align:center;color:var(--mut);font-size:.86rem;margin-top:26px;font-style:italic}
 @media(max-width:900px){.glist{grid-template-columns:1fr}}
 /* Owner CTA */
-.owner{background:linear-gradient(135deg,var(--navy),var(--teal-d));color:#fff}
-.owner .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;padding:64px 22px}
-.owner h2{color:#fff;font-size:2rem}
-.owner ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
-.owner li{display:flex;gap:10px;align-items:flex-start;color:#dbe7ec}
-.owner li::before{content:"✓";color:#ffd982;font-weight:800}
-.owner-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);padding:30px}
-.owner-card h3{color:#fff}
-.owner-card p{color:#cfe0e6}
+.owner{background:#f4ede0;color:#123049}
+.owner .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:start;padding:76px 22px}
+.owner .eyebrow{color:#c4661c}
+.owner h2{color:#123049;font-size:clamp(2rem,3.6vw,2.7rem);font-family:Georgia,'Times New Roman',serif;line-height:1.1;margin:6px 0 0}
+.owner .intro{color:#4a5560;font-size:1.05rem;margin:16px 0 0;line-height:1.55}
+.owner ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:13px}
+.owner li{display:flex;gap:11px;align-items:flex-start;color:#3c4855;font-size:.98rem;line-height:1.45}
+.owner li::before{content:"✓";color:#2f8f86;font-weight:800;flex:none}
+.btn-orange{display:inline-flex;align-items:center;gap:8px;background:#c4661c;color:#fff;font-weight:700;padding:14px 26px;border-radius:8px;transition:.2s}
+.btn-orange:hover{background:#a9560f;transform:translateY(-1px)}
+.btn-navy{display:inline-flex;align-items:center;gap:8px;background:#123049;color:#fff;font-weight:700;padding:14px 26px;border-radius:8px;transition:.2s}
+.btn-navy:hover{background:#0c2436;transform:translateY(-1px)}
 
 /* Case studies (home) */
 .cs-sec{background:#fff}
@@ -153,11 +156,8 @@ section.pad{padding:74px 0}
 .csbody .rd{margin-top:auto;color:var(--navy);font-weight:700;font-size:.9rem}
 .csbody .rd:hover{color:var(--teal)}
 .cs-cta{text-align:center;margin-top:36px}
-.owner-form{background:#fff;border-radius:var(--radius);padding:16px 16px 10px;box-shadow:var(--shadow)}
-.owner-form h3{color:var(--navy);margin:4px 6px 2px;font-size:1.25rem}
-.owner-form p{color:var(--mut);margin:0 6px 10px;font-size:.9rem}
-.owner-form iframe{width:100%;height:640px;border:0;border-radius:10px;display:block;background:#fff}
-.owner-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.owner-form{background:#fff;border-radius:16px;padding:34px 34px 38px;box-shadow:0 24px 60px rgba(18,48,73,.14)}
+.owner-actions{display:flex;flex-direction:column;gap:14px;margin-top:30px;align-items:flex-start}
 @media(max-width:900px){.csrow{grid-template-columns:1fr}}
 /* Footer */
 footer{background:var(--navy2);color:#b9c7d2;font-size:.92rem}
@@ -186,7 +186,21 @@ footer a:hover{color:#ffd982}
   .lake-copy img{order:-1}
 }
 </style>
-
+<style>
+.lead-form{max-width:100%}
+.lead-form .hp{position:absolute!important;left:-9999px}
+.lf-title{color:#123049;font-size:1.6rem;margin:0 0 4px;font-family:Georgia,'Times New Roman',serif}
+.lf-sub{color:#5f6b78;font-size:.92rem;margin:0 0 16px;line-height:1.45}
+.lead-form label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#123049;margin:14px 0 6px}
+.lead-form input,.lead-form select,.lead-form textarea{width:100%;padding:13px 14px;border:1px solid #e0d6c3;border-radius:8px;background:#f3ece0;color:#1c2430;font-size:.98rem;font-family:inherit;transition:.15s}
+.lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{outline:none;border-color:#2f8f86;background:#fff;box-shadow:0 0 0 3px rgba(47,143,134,.15)}
+.lead-form textarea{resize:vertical}
+.lf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lf-btn{width:100%;margin-top:24px;background:#c4661c;color:#fff;font-weight:700;font-size:1.02rem;padding:15px;border:none;border-radius:8px;cursor:pointer;transition:.2s}
+.lf-btn:hover{background:#a9560f}
+.lf-ok{margin-top:16px;background:#e8f6ee;border:1px solid #b6e2c8;color:#1c6b3f;padding:14px 16px;border-radius:10px;font-weight:600;font-size:.95rem}
+@media(max-width:560px){.lf-row{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
@@ -381,24 +395,47 @@ footer a:hover{color:#ffd982}
 
 <section class="owner" id="owners">
   <div class="wrap">
-    <h2>Own a Lake Keowee Home? Let's Talk.</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start">
-      <div>
-        <p style="color:#dbe7ec;font-size:1.05rem">Basecamp Getaways manages lakefront rentals end-to-end so you can enjoy your home while it earns. We handle design, listings, pricing, guests, and dock-side care — with a local team on the ground, not a national call center.</p>
-        <ul>
-          <li>AI-powered dynamic pricing to maximize revenue</li>
-          <li>Multi-platform listings + your own direct-booking page</li>
-          <li>Keyless entry &amp; professional photography</li>
-          <li>Guest screening &amp; 24/7 communication</li>
-          <li>Transparent fees and a local care team</li>
-        </ul>
-        <div class="owner-actions">
-          <a class="btn" href="https://link.basecampgetaways.com/widget/booking/ux0V6sy1tHczRlxZIU3o" target="_blank" rel="noopener">Schedule a Call →</a>
-          <a class="btn ghost" href="/lake-keowee-vacation-rental-management">See Our Case Studies</a>
-        </div>
+    <div>
+      <div class="eyebrow">For Property Owners</div>
+      <h2>Own a Lake Keowee Home? Let's Talk.</h2>
+      <p class="intro">Lake Keowee is one of the Southeast's most in-demand short-term rental markets — and most owners are leaving significant revenue on the table. We manage every detail so you don't have to.</p>
+      <ul>
+        <li>AI-powered dynamic pricing — daily rate adjustments to maximize peak-season revenue and fill shoulder months</li>
+        <li>Multi-platform listing on Airbnb, VRBO, and direct booking for maximum visibility</li>
+        <li>100% keyless entry — no lockboxes, no key pickup, no coordination headaches</li>
+        <li>Professional photography and listing copy that converts browsers into bookings</li>
+        <li>Guest screening, 24/7 communication, and 5-star review management</li>
+        <li>Transparent fee structure — you always know exactly what you're earning</li>
+        <li>Local care team for inspections, maintenance, and on-site response</li>
+        <li>Monthly owner statements with full revenue breakdown</li>
+        <li>We think like asset owners — your home's long-term condition matters to us</li>
+      </ul>
+      <div class="owner-actions">
+        <a class="btn-orange" href="https://link.basecampgetaways.com/widget/booking/ux0V6sy1tHczRlxZIU3o" target="_blank" rel="noopener">Schedule a Call →</a>
+        <a class="btn-navy" href="/lake-keowee-vacation-rental-management">Case Studies — See the Results →</a>
       </div>
-      <div class="owner-form"><iframe src="https://link.basecampgetaways.com/widget/form/qVfRSODy12KKV9R82IZs" style="width:100%;min-height:892px;border:none;border-radius:8px;background:#fff" id="inline-qVfRSODy12KKV9R82IZs" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Basecamp Getaways Management" data-height="892" data-layout-iframe-id="inline-qVfRSODy12KKV9R82IZs" data-form-id="qVfRSODy12KKV9R82IZs" title="Get a Free Revenue Estimate"></iframe></div>
     </div>
+    <div class="owner-form"><form name="revenue-estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="lead-form" onsubmit="return submitLead(event)">
+  <input type="hidden" name="form-name" value="revenue-estimate">
+  <p class="hp"><label>Do not fill this out: <input name="bot-field"></label></p>
+  <h3 class="lf-title">Get a Free Revenue Estimate</h3>
+  <p class="lf-sub">Tell us about your Lake Keowee property and we&rsquo;ll send a free revenue projection with no obligation.</p>
+  <div class="lf-row">
+    <div><label>First Name</label><input name="first_name" type="text" autocomplete="given-name"></div>
+    <div><label>Last Name</label><input name="last_name" type="text" autocomplete="family-name"></div>
+  </div>
+  <label>Email</label><input name="email" type="email" required autocomplete="email">
+  <label>Phone</label><input name="phone" type="tel" autocomplete="tel">
+  <label>Property Address / Area on the Lake</label><input name="property_address" type="text" placeholder="e.g. Sunset, Keowee Key, Cliffs at Keowee">
+  <div class="lf-row">
+    <div><label>Bedrooms</label><select name="bedrooms"><option>1&ndash;2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select></div>
+    <div><label>Current Status</label><select name="status"><option>Not currently renting</option><option>I rent it myself</option><option>Managed by another company</option></select></div>
+  </div>
+  <label>Private Dock?</label><select name="dock"><option>Yes &mdash; private dock</option><option>Shared / community dock</option><option>Dockable &mdash; no dock yet</option><option>No dock</option></select>
+  <label>Tell Us About Your Property</label><textarea name="message" rows="4" placeholder="Goals, questions, current situation..."></textarea>
+  <button type="submit" class="lf-btn">Send My Free Revenue Estimate</button>
+  <div class="lf-ok" hidden>&#10003; Thanks! Your request is in &mdash; we&rsquo;ll be in touch shortly with your free revenue estimate.</div>
+</form></div>
   </div>
 </section>
 
@@ -464,6 +501,19 @@ document.getElementById('lb').onclick=function(e){if(e.target.id==='lb')closeLB(
 document.addEventListener('keydown',function(e){if(!document.getElementById('lb').classList.contains('open'))return;
   if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);});
 </script>
-<script src="https://link.basecampgetaways.com/js/form_embed.js"></script>
+<script>
+function submitLead(e){
+  e.preventDefault();
+  var form=e.target, data=new FormData(form), body=new URLSearchParams();
+  data.forEach(function(v,k){body.append(k,v);});
+  var s=body.toString();
+  var GHL='https://services.leadconnectorhq.com/hooks/p4Ia2GHMp8aHTsE7gsh1/webhook-trigger/9af28758-a06e-40f3-bf2a-ef67b4d074eb';
+  try{fetch(GHL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:s});}catch(_){}
+  try{fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:s});}catch(_){}
+  var ok=form.querySelector('.lf-ok');
+  if(ok){ok.hidden=false; Array.prototype.slice.call(form.children).forEach(function(c){if(!c.classList.contains('lf-ok'))c.style.display='none';}); ok.scrollIntoView({behavior:'smooth',block:'center'});}
+  return false;
+}
+</script>
 </body>
 </html>
